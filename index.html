@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cakes That Smile | Artisan Pastries — USA</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Dancing+Script:wght@600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#FDF6EE;--cream-dark:#F5E9D3;--brown:#3D1A08;--brown-mid:#8B5E3C;
+  --teal:#2BAAAD;--teal-dark:#1D7E81;--pink:#F2A7BE;--gold:#C9A86C;
+  --white:#FFFFFF;--text:#3D1A08;--text-light:#7A5234;
+  --shadow:rgba(61,26,8,.12);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Lato',sans-serif;background:var(--cream);color:var(--text);line-height:1.7}
+img{max-width:100%;display:block}
+a{text-decoration:none;color:inherit}
+
+/* UTIL */
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+.sec-title{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,4vw,2.75rem);color:var(--brown);text-align:center;margin-bottom:.4rem}
+.sec-sub{font-family:'Dancing Script',cursive;font-size:1.3rem;color:var(--teal);text-align:center;margin-bottom:3rem}
+.divider{width:72px;height:3px;background:linear-gradient(90deg,var(--teal),var(--gold));margin:.8rem auto .4rem;border-radius:2px}
+.btn{display:inline-block;padding:13px 34px;border-radius:50px;font-family:'Lato',sans-serif;font-weight:700;font-size:.9rem;letter-spacing:1px;text-transform:uppercase;cursor:pointer;border:none;transition:all .3s}
+.btn-primary{background:var(--teal);color:#fff}
+.btn-primary:hover{background:var(--teal-dark);transform:translateY(-2px);box-shadow:0 8px 20px rgba(43,170,173,.35)}
+.btn-outline{background:transparent;color:var(--brown);border:2px solid var(--brown)}
+.btn-outline:hover{background:var(--brown);color:#fff;transform:translateY(-2px)}
+.btn-gold{background:var(--gold);color:#fff}
+.btn-gold:hover{background:#b8935a;transform:translateY(-2px);box-shadow:0 8px 20px rgba(201,168,108,.4)}
+
+/* NAVBAR */
+#navbar{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(253,246,238,.96);backdrop-filter:blur(8px);box-shadow:0 2px 20px var(--shadow);transition:all .3s}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:70px}
+.nav-logo img{height:50px;width:auto}
+.nav-links{display:flex;list-style:none;gap:2rem}
+.nav-links a{font-weight:700;font-size:.84rem;letter-spacing:1.2px;text-transform:uppercase;color:var(--brown);transition:color .3s;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:2px;background:var(--teal);transform:scaleX(0);transition:transform .3s}
+.nav-links a:hover{color:var(--teal)}
+.nav-links a:hover::after{transform:scaleX(1)}
+.nav-cta{margin-left:1rem}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+.hamburger span{width:26px;height:2px;background:var(--brown);border-radius:2px;transition:all .3s;display:block}
+.mobile-menu{display:none;position:fixed;top:70px;left:0;right:0;background:rgba(253,246,238,.98);backdrop-filter:blur(10px);padding:16px 24px 28px;z-index:999;box-shadow:0 8px 20px var(--shadow)}
+.mobile-menu.open{display:block}
+.mobile-menu ul{list-style:none}
+.mobile-menu ul li{border-bottom:1px solid var(--cream-dark)}
+.mobile-menu ul li a{display:block;padding:13px 0;font-weight:700;font-size:.9rem;letter-spacing:1px;text-transform:uppercase;color:var(--brown)}
+.mobile-menu .btn{width:100%;text-align:center;margin-top:14px;display:block}
+
+/* HERO */
+#hero{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#FDF6EE 0%,#F8E8CE 50%,#FDF0F5 100%);padding:90px 24px 60px;position:relative;overflow:hidden}
+#hero::before{content:'';position:absolute;top:-100px;right:-100px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(43,170,173,.08) 0%,transparent 70%)}
+#hero::after{content:'';position:absolute;bottom:-80px;left:-80px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,108,.1) 0%,transparent 70%)}
+.hero-content{text-align:center;max-width:780px;position:relative;z-index:1}
+.hero-logo{max-width:370px;margin:0 auto 2rem;filter:drop-shadow(0 4px 20px rgba(61,26,8,.12))}
+.hero-tagline{font-family:'Dancing Script',cursive;font-size:clamp(1.5rem,3vw,2.1rem);color:var(--brown-mid);margin-bottom:1rem}
+.hero-desc{font-size:1.05rem;color:var(--text-light);margin-bottom:2.5rem;max-width:560px;margin-left:auto;margin-right:auto}
+.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.hero-badges{margin-top:3rem;display:flex;gap:2rem;justify-content:center;flex-wrap:wrap}
+.badge-item{display:flex;flex-direction:column;align-items:center;gap:.3rem}
+.badge-icon{font-size:1.7rem}
+.badge-label{font-size:.78rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--brown-mid)}
+
+/* ABOUT */
+#about{padding:100px 24px;background:var(--white)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;max-width:1100px;margin:0 auto}
+.about-images{position:relative;height:480px}
+.about-img-main{position:absolute;top:0;left:0;width:78%;height:85%;object-fit:cover;border-radius:16px;box-shadow:0 12px 40px var(--shadow)}
+.about-img-accent{position:absolute;bottom:0;right:0;width:52%;height:52%;object-fit:cover;border-radius:16px;box-shadow:0 8px 30px var(--shadow);border:5px solid var(--white)}
+.about-text .sec-title,.about-text .sec-sub{text-align:left}
+.about-text .divider{margin:1rem 0 .5rem}
+.about-text p{color:var(--text-light);margin-bottom:1.2rem;font-size:1rem}
+.about-highlights{display:flex;gap:1.2rem;margin-top:1.8rem;flex-wrap:wrap}
+.highlight{background:var(--cream);border-radius:12px;padding:16px 20px;flex:1;min-width:110px;text-align:center;border-top:3px solid var(--teal)}
+.highlight-num{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;color:var(--teal)}
+.highlight-lbl{font-size:.77rem;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--brown-mid)}
+
+/* SPECIALTIES */
+#specialties{padding:100px 24px;background:var(--cream)}
+.menu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:28px;max-width:1100px;margin:0 auto}
+.menu-card{background:var(--white);border-radius:20px;overflow:hidden;box-shadow:0 4px 20px var(--shadow);transition:transform .3s,box-shadow .3s}
+.menu-card:hover{transform:translateY(-6px);box-shadow:0 12px 36px rgba(61,26,8,.18)}
+.menu-card-img{width:100%;height:215px;object-fit:cover}
+.menu-card-body{padding:20px 22px}
+.menu-card-title{font-family:'Playfair Display',serif;font-size:1.25rem;color:var(--brown);margin-bottom:.4rem}
+.menu-card-desc{color:var(--text-light);font-size:.9rem;margin-bottom:1.1rem}
+.menu-card-footer{display:flex;align-items:center;justify-content:space-between}
+.menu-price{font-family:'Playfair Display',serif;font-size:1.35rem;font-weight:600;color:var(--teal)}
+.menu-tag{font-size:.72rem;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#fff;background:var(--gold);padding:4px 12px;border-radius:20px}
+
+/* GALLERY */
+#gallery{padding:100px 24px;background:var(--white)}
+.gallery-filters{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;margin-bottom:2.5rem}
+.filter-btn{padding:8px 22px;border-radius:30px;border:2px solid var(--cream-dark);background:transparent;font-family:'Lato',sans-serif;font-weight:700;font-size:.8rem;letter-spacing:.8px;text-transform:uppercase;cursor:pointer;color:var(--brown-mid);transition:all .3s}
+.filter-btn.active,.filter-btn:hover{background:var(--teal);border-color:var(--teal);color:#fff}
+.gallery-grid{columns:4;column-gap:14px;max-width:1200px;margin:0 auto}
+.gallery-item{break-inside:avoid;margin-bottom:14px;border-radius:12px;overflow:hidden;cursor:pointer;position:relative}
+.gallery-item img{width:100%;border-radius:12px;transition:transform .4s}
+.gallery-item:hover img{transform:scale(1.04)}
+.gallery-overlay{position:absolute;inset:0;background:rgba(61,26,8,.45);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .3s;border-radius:12px;font-size:1.8rem}
+.gallery-item:hover .gallery-overlay{opacity:1}
+
+/* LIGHTBOX */
+#lightbox{display:none;position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.9);align-items:center;justify-content:center}
+#lightbox.open{display:flex}
+.lb-img{max-width:90vw;max-height:88vh;border-radius:8px;object-fit:contain}
+.lb-close{position:absolute;top:18px;right:26px;font-size:2.2rem;color:#fff;cursor:pointer;background:none;border:none;line-height:1}
+.lb-prev,.lb-next{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.15);border:none;color:#fff;font-size:2rem;cursor:pointer;padding:12px 18px;border-radius:8px;transition:background .3s}
+.lb-prev{left:18px}.lb-next{right:18px}
+.lb-prev:hover,.lb-next:hover{background:rgba(255,255,255,.3)}
+
+/* ORDER */
+#order{padding:100px 24px;background:linear-gradient(135deg,var(--cream) 0%,#EEF9F9 100%)}
+.order-wrapper{max-width:780px;margin:0 auto;background:var(--white);border-radius:24px;padding:48px;box-shadow:0 8px 40px var(--shadow)}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.form-group{display:flex;flex-direction:column;gap:5px}
+.form-group.full{grid-column:1/-1}
+.form-group label{font-weight:700;font-size:.81rem;letter-spacing:.8px;text-transform:uppercase;color:var(--brown)}
+.form-group input,.form-group select,.form-group textarea{padding:11px 15px;border:2px solid var(--cream-dark);border-radius:10px;font-family:'Lato',sans-serif;font-size:.95rem;color:var(--text);background:var(--cream);transition:border-color .3s,box-shadow .3s;outline:none;width:100%}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(43,170,173,.12);background:var(--white)}
+.form-group textarea{resize:vertical;min-height:110px}
+.order-items-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px}
+.oitem{border:2px solid var(--cream-dark);border-radius:12px;padding:13px 10px;cursor:pointer;transition:all .3s;text-align:center;user-select:none}
+.oitem:hover,.oitem.selected{border-color:var(--teal);background:rgba(43,170,173,.06)}
+.oitem input[type=checkbox]{display:none}
+.oitem-icon{font-size:1.7rem;margin-bottom:.25rem}
+.oitem-name{font-weight:700;font-size:.87rem;color:var(--brown)}
+.oitem-price{font-size:.79rem;color:var(--teal);font-weight:700}
+.form-submit{text-align:center;margin-top:1.8rem}
+.form-note{font-size:.8rem;color:var(--text-light);margin-top:.9rem;text-align:center}
+
+/* TESTIMONIALS */
+#testimonials{padding:100px 24px;background:var(--cream-dark)}
+.testimonials-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px;max-width:1000px;margin:0 auto}
+.tcard{background:var(--white);border-radius:20px;padding:28px;box-shadow:0 4px 20px var(--shadow);position:relative}
+.tcard::before{content:'\201C';position:absolute;top:14px;left:22px;font-family:'Playfair Display',serif;font-size:5rem;color:var(--teal);opacity:.13;line-height:1}
+.tcard-stars{color:#F4B942;font-size:1rem;margin-bottom:.9rem}
+.tcard-text{color:var(--text-light);font-size:.94rem;font-style:italic;margin-bottom:1.4rem}
+.tcard-author{font-weight:700;color:var(--brown);font-size:.88rem}
+.tcard-loc{font-size:.78rem;color:var(--text-light)}
+
+/* CONTACT */
+#contact{padding:100px 24px;background:var(--brown)}
+#contact .sec-title{color:var(--cream)}
+#contact .sec-sub{color:var(--gold)}
+.contact-wrapper{display:grid;grid-template-columns:1fr 1.4fr;gap:60px;max-width:1000px;margin:0 auto;align-items:start}
+.cinfo h3{font-family:'Playfair Display',serif;font-size:1.45rem;color:var(--cream);margin-bottom:1.5rem}
+.cdetail{display:flex;gap:1rem;align-items:flex-start;margin-bottom:1.4rem}
+.cicon{width:42px;height:42px;background:rgba(43,170,173,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.cdetail-text{color:rgba(253,246,238,.85);font-size:.93rem}
+.cdetail-label{font-weight:700;color:var(--gold);font-size:.79rem;text-transform:uppercase;letter-spacing:.8px}
+.social-links{display:flex;gap:.7rem;margin-top:1.8rem}
+.social-btn{width:44px;height:44px;background:rgba(43,170,173,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.05rem;color:var(--cream);border:1px solid rgba(43,170,173,.4);transition:all .3s;cursor:pointer;text-decoration:none}
+.social-btn:hover{background:var(--teal);border-color:var(--teal)}
+.cform-card{background:rgba(255,255,255,.06);border:1px solid rgba(253,246,238,.14);border-radius:20px;padding:38px}
+.cform-card .form-group input,.cform-card .form-group select,.cform-card .form-group textarea{background:rgba(255,255,255,.07);border-color:rgba(253,246,238,.18);color:var(--cream)}
+.cform-card .form-group input::placeholder,.cform-card .form-group textarea::placeholder{color:rgba(253,246,238,.38)}
+.cform-card .form-group label{color:rgba(253,246,238,.8)}
+.cform-card .form-group select option{background:var(--brown);color:var(--cream)}
+.cform-card .form-group input:focus,.cform-card .form-group textarea:focus,.cform-card .form-group select:focus{border-color:var(--teal);background:rgba(255,255,255,.12)}
+
+/* FOOTER */
+footer{background:#1A0A03;color:rgba(253,246,238,.7);padding:50px 24px 28px}
+.footer-inner{display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px;max-width:1100px;margin:0 auto 36px}
+.footer-brand img{height:54px;margin-bottom:1rem}
+.footer-brand p{font-size:.88rem;line-height:1.7;max-width:280px}
+.footer-col h4{font-weight:700;font-size:.82rem;text-transform:uppercase;letter-spacing:1.2px;color:var(--gold);margin-bottom:1.1rem}
+.footer-col ul{list-style:none}
+.footer-col ul li{margin-bottom:.65rem}
+.footer-col ul li a{color:rgba(253,246,238,.62);font-size:.88rem;transition:color .3s}
+.footer-col ul li a:hover{color:var(--teal)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.08);padding-top:22px;text-align:center;max-width:1100px;margin:0 auto;font-size:.8rem}
+.footer-bottom a{color:var(--teal)}
+
+/* SCROLL FADE */
+.fade-up{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+.fade-up.visible{opacity:1;transform:translateY(0)}
+
+/* TOAST */
+.toast{position:fixed;bottom:28px;right:28px;background:var(--teal);color:#fff;padding:13px 22px;border-radius:12px;font-weight:700;box-shadow:0 6px 20px rgba(43,170,173,.4);transform:translateY(80px);opacity:0;transition:all .4s cubic-bezier(.34,1.56,.64,1);z-index:3000;font-size:.93rem}
+.toast.show{transform:translateY(0);opacity:1}
+
+/* RESPONSIVE */
+@media(max-width:1024px){.gallery-grid{columns:3}}
+@media(max-width:900px){
+  .about-grid{grid-template-columns:1fr}
+  .about-images{height:320px}
+  .contact-wrapper{grid-template-columns:1fr}
+  .footer-inner{grid-template-columns:1fr 1fr}
+}
+@media(max-width:768px){
+  .nav-links,.nav-cta{display:none}
+  .hamburger{display:flex}
+  .form-grid{grid-template-columns:1fr}
+  .form-group.full{grid-column:1}
+  .footer-inner{grid-template-columns:1fr}
+  .order-wrapper{padding:28px 20px}
+  .cform-card{padding:26px 20px}
+  .gallery-grid{columns:2}
+}
+@media(max-width:480px){
+  .hero-btns{flex-direction:column;align-items:center}
+  .gallery-grid{columns:1}
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <div class="container nav-inner">
+    <a href="#hero" class="nav-logo"><img src="Refined/Logo's/perfect.png" alt="Cakes That Smile"></a>
+    <ul class="nav-links">
+      <li><a href="#about">Our Story</a></li>
+      <li><a href="#specialties">Menu</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#order">Order</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="#order" class="btn btn-primary nav-cta">Place an Order</a>
+    <button class="hamburger" id="hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <ul>
+    <li><a href="#about" onclick="closeMobile()">Our Story</a></li>
+    <li><a href="#specialties" onclick="closeMobile()">Menu</a></li>
+    <li><a href="#gallery" onclick="closeMobile()">Gallery</a></li>
+    <li><a href="#order" onclick="closeMobile()">Order</a></li>
+    <li><a href="#contact" onclick="closeMobile()">Contact</a></li>
+  </ul>
+  <a href="#order" class="btn btn-primary" onclick="closeMobile()">Place an Order</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-content">
+    <img src="Refined/Logo's/perfect.png" alt="Cakes That Smile" class="hero-logo">
+    <p class="hero-tagline">Handcrafted with love, baked to perfection</p>
+    <p class="hero-desc">Small-batch artisan pastries made fresh to order in the USA. From heirloom bundt cakes to rustic loaves — every bite tells a story.</p>
+    <div class="hero-btns">
+      <a href="#order" class="btn btn-primary">Order Now</a>
+      <a href="#gallery" class="btn btn-outline">See Our Work</a>
+    </div>
+    <div class="hero-badges">
+      <div class="badge-item"><span class="badge-icon">🧁</span><span class="badge-label">Made to Order</span></div>
+      <div class="badge-item"><span class="badge-icon">🌾</span><span class="badge-label">All-Natural</span></div>
+      <div class="badge-item"><span class="badge-icon">🚚</span><span class="badge-label">Local Delivery</span></div>
+      <div class="badge-item"><span class="badge-icon">❤️</span><span class="badge-label">Made With Love</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-images fade-up">
+        <img src="20.jpeg" alt="Berry crumble cake" class="about-img-main">
+        <img src="22.jpeg" alt="Classic bundt cake" class="about-img-accent">
+      </div>
+      <div class="about-text fade-up">
+        <p class="sec-sub">Our Story</p>
+        <h2 class="sec-title">Where Every Cake Tells a Story</h2>
+        <div class="divider" style="margin-left:0"></div>
+        <p>Cakes That Smile was born from a simple belief — the best pastries come from kitchens filled with passion, not factories. Every recipe we bake is a labor of love, crafted from scratch using time-honored techniques passed down through generations.</p>
+        <p>Based right here in the USA, we specialize in small-batch bundt cakes, hearty loaf cakes, and seasonal specialty pastries — all made to order so you always get the freshest possible treat.</p>
+        <p>Whether you're celebrating a milestone, sending a gift, or simply treating yourself — we put a smile in every single bite.</p>
+        <div class="about-highlights">
+          <div class="highlight"><div class="highlight-num">100%</div><div class="highlight-lbl">Scratch-Made</div></div>
+          <div class="highlight"><div class="highlight-num">Fresh</div><div class="highlight-lbl">Daily Baked</div></div>
+          <div class="highlight"><div class="highlight-num">★★★★★</div><div class="highlight-lbl">5-Star Rated</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPECIALTIES -->
+<section id="specialties">
+  <div class="container">
+    <h2 class="sec-title fade-up">Our Specialties</h2>
+    <div class="divider"></div>
+    <p class="sec-sub fade-up">Everything baked fresh, just for you</p>
+    <div class="menu-grid">
+      <div class="menu-card fade-up">
+        <img src="24.jpeg" alt="Classic Bundt Cake" class="menu-card-img">
+        <div class="menu-card-body">
+          <h3 class="menu-card-title">Classic Bundt Cake</h3>
+          <p class="menu-card-desc">Dense, golden, and gloriously moist. Our signature vanilla pound bundt — beautiful on any table and even better on your palate.</p>
+          <div class="menu-card-footer"><span class="menu-price">From $38</span><span class="menu-tag">Bestseller</span></div>
+        </div>
+      </div>
+      <div class="menu-card fade-up">
+        <img src="10.jpeg" alt="Nut & Spice Loaf" class="menu-card-img">
+        <div class="menu-card-body">
+          <h3 class="menu-card-title">Nut &amp; Spice Loaf</h3>
+          <p class="menu-card-desc">Loaded with toasted almonds and pecans, kissed with cinnamon warmth. A rustic loaf that pairs perfectly with your morning coffee.</p>
+          <div class="menu-card-footer"><span class="menu-price">From $28</span><span class="menu-tag">Fan Favorite</span></div>
+        </div>
+      </div>
+      <div class="menu-card fade-up">
+        <img src="20.jpeg" alt="Berry Crumble Cake" class="menu-card-img">
+        <div class="menu-card-body">
+          <h3 class="menu-card-title">Berry Crumble Cake</h3>
+          <p class="menu-card-desc">A cloud-soft vanilla base layered with fresh berries and a buttery golden crumble top. Seasonal, special, and absolutely irresistible.</p>
+          <div class="menu-card-footer"><span class="menu-price">From $42</span><span class="menu-tag">Seasonal</span></div>
+        </div>
+      </div>
+      <div class="menu-card fade-up">
+        <img src="15.jpeg" alt="Assorted Pastry Box" class="menu-card-img">
+        <div class="menu-card-body">
+          <h3 class="menu-card-title">Assorted Pastry Box</h3>
+          <p class="menu-card-desc">Can't choose just one? Our curated box features a selection of mini cakes and loaves — perfect for gifting or any occasion.</p>
+          <div class="menu-card-footer"><span class="menu-price">From $65</span><span class="menu-tag">Great Gift</span></div>
+        </div>
+      </div>
+      <div class="menu-card fade-up">
+        <img src="1.jpeg" alt="Spice Bundt Cake" class="menu-card-img">
+        <div class="menu-card-body">
+          <h3 class="menu-card-title">Spice Bundt Cake</h3>
+          <p class="menu-card-desc">Warm cinnamon, nutmeg, and clove folded into a rich dark crumb. This heritage recipe brings the comfort of home in every slice.</p>
+          <div class="menu-card-footer"><span class="menu-price">From $38</span><span class="menu-tag">Heritage Recipe</span></div>
+        </div>
+      </div>
+      <div class="menu-card fade-up">
+        <img src="22.jpeg" alt="Custom Orders" class="menu-card-img">
+        <div class="menu-card-body">
+          <h3 class="menu-card-title">Custom Orders</h3>
+          <p class="menu-card-desc">Have a special occasion in mind? We love creating bespoke pastries for weddings, corporate events, birthdays, and celebrations.</p>
+          <div class="menu-card-footer"><span class="menu-price">Contact Us</span><span class="menu-tag">Bespoke</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="container">
+    <h2 class="sec-title fade-up">Our Gallery</h2>
+    <div class="divider"></div>
+    <p class="sec-sub fade-up">Fresh from our kitchen to your screen</p>
+    <div class="gallery-filters fade-up">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="bundt">Bundt Cakes</button>
+      <button class="filter-btn" data-filter="loaf">Loaf Cakes</button>
+      <button class="filter-btn" data-filter="special">Specialty</button>
+    </div>
+    <div class="gallery-grid" id="galleryGrid"></div>
+  </div>
+</section>
+
+<div id="lightbox">
+  <button class="lb-close" id="lbClose">&times;</button>
+  <button class="lb-prev" id="lbPrev">&#8592;</button>
+  <img src="" alt="" class="lb-img" id="lbImg">
+  <button class="lb-next" id="lbNext">&#8594;</button>
+</div>
+
+<!-- ORDER -->
+<section id="order">
+  <div class="container">
+    <h2 class="sec-title fade-up">Place an Order</h2>
+    <div class="divider"></div>
+    <p class="sec-sub fade-up">Fresh baked just for you — please allow 48–72 hrs notice</p>
+    <div class="order-wrapper fade-up">
+      <form id="orderForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <input type="hidden" name="_subject" value="New Order — Cakes That Smile">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="o-name">Full Name *</label>
+            <input type="text" id="o-name" name="name" placeholder="Jane Smith" required>
+          </div>
+          <div class="form-group">
+            <label for="o-email">Email Address *</label>
+            <input type="email" id="o-email" name="email" placeholder="jane@email.com" required>
+          </div>
+          <div class="form-group">
+            <label for="o-phone">Phone Number *</label>
+            <input type="tel" id="o-phone" name="phone" placeholder="(555) 000-0000" required>
+          </div>
+          <div class="form-group">
+            <label for="o-date">Desired Pickup / Delivery Date *</label>
+            <input type="date" id="o-date" name="pickup_date" required>
+          </div>
+          <div class="form-group full">
+            <label>Select Items (choose all that apply) *</label>
+            <div class="order-items-grid">
+              <label class="oitem"><input type="checkbox" name="items" value="Classic Bundt Cake ($38+)"><div class="oitem-icon">🍰</div><div class="oitem-name">Classic Bundt</div><div class="oitem-price">From $38</div></label>
+              <label class="oitem"><input type="checkbox" name="items" value="Spice Bundt Cake ($38+)"><div class="oitem-icon">🍂</div><div class="oitem-name">Spice Bundt</div><div class="oitem-price">From $38</div></label>
+              <label class="oitem"><input type="checkbox" name="items" value="Nut & Spice Loaf ($28+)"><div class="oitem-icon">🌰</div><div class="oitem-name">Nut &amp; Spice Loaf</div><div class="oitem-price">From $28</div></label>
+              <label class="oitem"><input type="checkbox" name="items" value="Berry Crumble Cake ($42+)"><div class="oitem-icon">🫐</div><div class="oitem-name">Berry Crumble</div><div class="oitem-price">From $42</div></label>
+              <label class="oitem"><input type="checkbox" name="items" value="Assorted Pastry Box ($65+)"><div class="oitem-icon">🎁</div><div class="oitem-name">Assorted Box</div><div class="oitem-price">From $65</div></label>
+              <label class="oitem"><input type="checkbox" name="items" value="Custom Order"><div class="oitem-icon">✨</div><div class="oitem-name">Custom Order</div><div class="oitem-price">Let's Talk</div></label>
+            </div>
+          </div>
+          <div class="form-group full">
+            <label for="o-delivery">Pickup or Delivery?</label>
+            <select id="o-delivery" name="delivery_type">
+              <option value="">-- Select --</option>
+              <option value="pickup">Pickup (address confirmed after order)</option>
+              <option value="local_delivery">Local Delivery (we'll confirm availability)</option>
+              <option value="shipping">Shipping — Continental US</option>
+            </select>
+          </div>
+          <div class="form-group full">
+            <label for="o-notes">Flavor Preferences / Special Notes</label>
+            <textarea id="o-notes" name="notes" placeholder="Any flavor requests, dietary restrictions (gluten-free, nut allergies, etc.), event details, or anything else we should know..."></textarea>
+          </div>
+        </div>
+        <div class="form-submit">
+          <button type="submit" class="btn btn-primary" style="font-size:1rem;padding:15px 48px">Submit Order Request</button>
+          <p class="form-note">We'll confirm your order and pricing within 24 hours. A deposit may be required for large or custom orders.</p>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="container">
+    <h2 class="sec-title fade-up">What Our Customers Say</h2>
+    <div class="divider"></div>
+    <p class="sec-sub fade-up">Real smiles, real bites</p>
+    <div class="testimonials-grid">
+      <div class="tcard fade-up">
+        <div class="tcard-stars">★★★★★</div>
+        <p class="tcard-text">"I ordered the Classic Bundt for my mother's birthday and she was in tears — happy tears! The cake was moist, flavorful, and absolutely beautiful. Will order again for every occasion."</p>
+        <div class="tcard-author">Michelle R.</div><div class="tcard-loc">Atlanta, GA</div>
+      </div>
+      <div class="tcard fade-up">
+        <div class="tcard-stars">★★★★★</div>
+        <p class="tcard-text">"The Nut &amp; Spice Loaf was a huge hit at our office party. People were asking for the recipe — I just smiled and said 'a local baker I know.' Thank you Cakes That Smile!"</p>
+        <div class="tcard-author">David T.</div><div class="tcard-loc">Charlotte, NC</div>
+      </div>
+      <div class="tcard fade-up">
+        <div class="tcard-stars">★★★★★</div>
+        <p class="tcard-text">"The Berry Crumble is unlike anything I've had from a bakery or store. It tasted like something my grandmother would have made. That means everything. Absolutely extraordinary."</p>
+        <div class="tcard-author">Sandra K.</div><div class="tcard-loc">Nashville, TN</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <h2 class="sec-title fade-up">Get In Touch</h2>
+    <div class="divider"></div>
+    <p class="sec-sub fade-up">We'd love to hear from you</p>
+    <div class="contact-wrapper">
+      <div class="cinfo fade-up">
+        <h3>Let's Make Something Sweet Together</h3>
+        <div class="cdetail"><div class="cicon">📧</div><div><div class="cdetail-label">Email</div><div class="cdetail-text">hello@cakesthatsmile.com</div></div></div>
+        <div class="cdetail"><div class="cicon">📱</div><div><div class="cdetail-label">Phone / Text</div><div class="cdetail-text">(555) 000-0000</div></div></div>
+        <div class="cdetail"><div class="cicon">🕐</div><div><div class="cdetail-label">Order Lead Time</div><div class="cdetail-text">48–72 hours minimum<br>Custom orders: 1 week+</div></div></div>
+        <div class="cdetail"><div class="cicon">📍</div><div><div class="cdetail-label">Serving</div><div class="cdetail-text">Continental United States<br>Local pickup &amp; delivery available</div></div></div>
+        <div class="social-links">
+          <a href="#" class="social-btn" title="Instagram">📸</a>
+          <a href="#" class="social-btn" title="Facebook">📘</a>
+          <a href="#" class="social-btn" title="TikTok">🎵</a>
+          <a href="#" class="social-btn" title="Pinterest">📌</a>
+        </div>
+      </div>
+      <div class="cform-card fade-up">
+        <form id="contactForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+          <input type="hidden" name="_subject" value="Inquiry — Cakes That Smile">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="c-name">Name *</label>
+              <input type="text" id="c-name" name="name" placeholder="Your name" required>
+            </div>
+            <div class="form-group">
+              <label for="c-email">Email *</label>
+              <input type="email" id="c-email" name="email" placeholder="Your email" required>
+            </div>
+            <div class="form-group full">
+              <label for="c-subject">Topic</label>
+              <select id="c-subject" name="subject">
+                <option value="">-- Select a topic --</option>
+                <option value="general">General Inquiry</option>
+                <option value="pricing">Pricing Information</option>
+                <option value="custom">Custom / Bulk Orders</option>
+                <option value="event">Events &amp; Catering</option>
+                <option value="allergies">Allergen / Dietary Info</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div class="form-group full">
+              <label for="c-message">Message *</label>
+              <textarea id="c-message" name="message" placeholder="Tell us how we can help..." required style="min-height:130px"></textarea>
+            </div>
+          </div>
+          <div class="form-submit">
+            <button type="submit" class="btn btn-gold" style="font-size:1rem;padding:15px 38px">Send Message</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img src="Refined/Logo's/perfect.png" alt="Cakes That Smile">
+      <p>Handcrafted artisan pastries made fresh to order in the USA. Because every occasion deserves something truly special.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#about">Our Story</a></li>
+        <li><a href="#specialties">Menu &amp; Pricing</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#order">Place an Order</a></li>
+        <li><a href="#contact">Contact Us</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Our Specialties</h4>
+      <ul>
+        <li><a href="#order">Classic Bundt Cakes</a></li>
+        <li><a href="#order">Nut &amp; Spice Loaves</a></li>
+        <li><a href="#order">Berry Crumble Cakes</a></li>
+        <li><a href="#order">Assorted Gift Boxes</a></li>
+        <li><a href="#contact">Custom Orders</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2026 Cakes That Smile &mdash; All rights reserved. Made with ❤️ in the USA.<br>
+    <small><a href="#">Privacy Policy</a></small></p>
+  </div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// GALLERY
+const galleryImages = [
+  {src:'1.jpeg',cat:'bundt',alt:'Spice Bundt Cake'},
+  {src:'2.jpeg',cat:'bundt',alt:'Golden Bundt Cake'},
+  {src:'3.jpeg',cat:'bundt',alt:'Classic Bundt Cake'},
+  {src:'4.jpeg',cat:'bundt',alt:'Bundt Cake Close-up'},
+  {src:'5.jpeg',cat:'bundt',alt:'Vanilla Bundt Cake'},
+  {src:'6.jpeg',cat:'loaf',alt:'Nut Loaf Cake'},
+  {src:'7.jpeg',cat:'loaf',alt:'Spice Loaf'},
+  {src:'8.jpeg',cat:'bundt',alt:'Fresh Bundt Cake'},
+  {src:'9.jpeg',cat:'special',alt:'Specialty Pastry'},
+  {src:'10.jpeg',cat:'loaf',alt:'Almond Nut Loaf'},
+  {src:'11.jpeg',cat:'bundt',alt:'Artisan Bundt'},
+  {src:'12.jpeg',cat:'loaf',alt:'Rustic Loaf'},
+  {src:'13.jpeg',cat:'special',alt:'Special Cake'},
+  {src:'14.jpeg',cat:'bundt',alt:'Dark Bundt Cake'},
+  {src:'15.jpeg',cat:'special',alt:'Assorted Pastries'},
+  {src:'17.jpeg',cat:'bundt',alt:'Mini Bundt Cakes'},
+  {src:'18.jpeg',cat:'loaf',alt:'Cinnamon Loaf'},
+  {src:'20.jpeg',cat:'special',alt:'Berry Crumble Cake'},
+  {src:'21.jpeg',cat:'bundt',alt:'Fresh Baked Bundt'},
+  {src:'22.jpeg',cat:'bundt',alt:'Classic Bundt on Plate'},
+  {src:'23.jpeg',cat:'special',alt:'Specialty Cake'},
+  {src:'24.jpeg',cat:'bundt',alt:'Golden Bundt Cake'}
+];
+
+let currentFilter='all', currentIndex=0, filteredImages=[];
+
+function getFiltered(f){ return f==='all'?galleryImages:galleryImages.filter(i=>i.cat===f); }
+
+function renderGallery(filter){
+  filteredImages=getFiltered(filter);
+  document.getElementById('galleryGrid').innerHTML=filteredImages.map((img,idx)=>`
+    <div class="gallery-item" onclick="openLightbox(${idx})">
+      <img src="${img.src}" alt="${img.alt}" loading="lazy">
+      <div class="gallery-overlay">🔍</div>
+    </div>`).join('');
+}
+
+document.querySelectorAll('.filter-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    currentFilter=btn.dataset.filter;
+    renderGallery(currentFilter);
+  });
+});
+renderGallery('all');
+
+// LIGHTBOX
+const lightbox=document.getElementById('lightbox');
+const lbImg=document.getElementById('lbImg');
+function openLightbox(idx){ currentIndex=idx; lbImg.src=filteredImages[idx].src; lbImg.alt=filteredImages[idx].alt; lightbox.classList.add('open'); document.body.style.overflow='hidden'; }
+function closeLightbox(){ lightbox.classList.remove('open'); document.body.style.overflow=''; }
+document.getElementById('lbClose').onclick=closeLightbox;
+lightbox.addEventListener('click',e=>{ if(e.target===lightbox)closeLightbox(); });
+document.getElementById('lbPrev').onclick=()=>{ currentIndex=(currentIndex-1+filteredImages.length)%filteredImages.length; lbImg.src=filteredImages[currentIndex].src; };
+document.getElementById('lbNext').onclick=()=>{ currentIndex=(currentIndex+1)%filteredImages.length; lbImg.src=filteredImages[currentIndex].src; };
+document.addEventListener('keydown',e=>{ if(!lightbox.classList.contains('open'))return; if(e.key==='Escape')closeLightbox(); if(e.key==='ArrowLeft')document.getElementById('lbPrev').click(); if(e.key==='ArrowRight')document.getElementById('lbNext').click(); });
+
+// MOBILE MENU
+document.getElementById('hamburger').onclick=()=>document.getElementById('mobileMenu').classList.toggle('open');
+function closeMobile(){ document.getElementById('mobileMenu').classList.remove('open'); }
+
+// ORDER ITEM CARDS
+document.querySelectorAll('.oitem').forEach(card=>{
+  card.addEventListener('click',()=>{
+    card.classList.toggle('selected');
+    const cb=card.querySelector('input[type=checkbox]');
+    cb.checked=!cb.checked;
+  });
+});
+
+// SCROLL ANIMATIONS
+const obs=new IntersectionObserver(entries=>{ entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } }); },{threshold:.1});
+document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
+
+// MIN DATE
+const d=new Date(); d.setDate(d.getDate()+3);
+document.getElementById('o-date').min=d.toISOString().split('T')[0];
+
+// TOAST
+function showToast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),4500); }
+
+// FORM SUBMIT
+async function handleForm(e,form){
+  e.preventDefault();
+  const btn=form.querySelector('button[type=submit]');
+  const orig=btn.textContent; btn.textContent='Sending...'; btn.disabled=true;
+  try{
+    const res=await fetch(form.action,{method:'POST',body:new FormData(form),headers:{Accept:'application/json'}});
+    if(res.ok){ showToast('✅ Sent! We\'ll be in touch within 24 hours.'); form.reset(); document.querySelectorAll('.oitem').forEach(c=>c.classList.remove('selected')); }
+    else{ showToast('❌ Something went wrong — please email us directly.'); }
+  }catch{ showToast('❌ Network error — please email us directly.'); }
+  finally{ btn.textContent=orig; btn.disabled=false; }
+}
+document.getElementById('orderForm').addEventListener('submit',e=>handleForm(e,e.target));
+document.getElementById('contactForm').addEventListener('submit',e=>handleForm(e,e.target));
+</script>
+</body>
+</html>
