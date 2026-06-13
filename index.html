@@ -131,6 +131,14 @@ a{text-decoration:none;color:inherit}
 .oitem-body{padding:9px 10px 11px}
 .oitem-name{font-weight:700;font-size:.82rem;color:var(--brown)}
 .oitem-price{font-size:.79rem;color:var(--teal);font-weight:700}
+.oitem-icon{position:relative}
+.oitem-icon img{cursor:zoom-in}
+.oitem:hover .oitem-icon::after{content:'🔍 tap to enlarge';position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,.52);color:#fff;font-size:.68rem;font-weight:700;letter-spacing:.4px;text-align:center;padding:5px 4px;pointer-events:none}
+#extraPreviewImg{cursor:zoom-in}
+#zoomModal{display:none;position:fixed;inset:0;z-index:3000;background:rgba(0,0,0,.92);align-items:center;justify-content:center;cursor:zoom-out}
+#zoomModal.open{display:flex}
+.zoom-img{max-width:90vw;max-height:88vh;border-radius:14px;object-fit:contain;cursor:default;box-shadow:0 24px 60px rgba(0,0,0,.6)}
+.zoom-close{position:absolute;top:18px;right:26px;font-size:2.4rem;color:#fff;cursor:pointer;background:none;border:none;line-height:1}
 .extra-preview{display:none;align-items:center;gap:16px;margin-top:12px;padding:14px 16px;background:var(--cream);border:2px solid var(--teal);border-radius:14px}
 .extra-preview.show{display:flex}
 .extra-preview img{width:90px;height:90px;object-fit:cover;border-radius:10px;flex-shrink:0;box-shadow:0 4px 12px var(--shadow)}
@@ -574,6 +582,11 @@ footer{background:#1A0A03;color:rgba(253,246,238,.7);padding:50px 24px 28px}
 
 <div class="toast" id="toast"></div>
 
+<div id="zoomModal">
+  <button class="zoom-close" id="zoomClose">&times;</button>
+  <img src="" alt="" class="zoom-img" id="zoomImg">
+</div>
+
 <script>
 // GALLERY
 const galleryImages = [
@@ -633,6 +646,22 @@ function closeMobile(){ document.getElementById('mobileMenu').classList.remove('
 document.querySelectorAll('.oitem').forEach(card=>{
   const cb=card.querySelector('input[type=checkbox]');
   cb.addEventListener('change',()=>card.classList.toggle('selected',cb.checked));
+});
+
+// ORDER IMAGE ZOOM
+const zoomModal=document.getElementById('zoomModal');
+const zoomImg=document.getElementById('zoomImg');
+function openZoom(src,alt){zoomImg.src=src;zoomImg.alt=alt||'';zoomModal.classList.add('open');document.body.style.overflow='hidden';}
+function closeZoom(){zoomModal.classList.remove('open');document.body.style.overflow='';}
+document.getElementById('zoomClose').onclick=closeZoom;
+zoomModal.addEventListener('click',e=>{if(e.target===zoomModal)closeZoom();});
+document.addEventListener('keydown',e=>{if(zoomModal.classList.contains('open')&&e.key==='Escape')closeZoom();});
+document.querySelectorAll('.oitem-icon img').forEach(img=>{
+  img.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();openZoom(img.src,img.alt);});
+});
+document.getElementById('extraPreviewImg').addEventListener('click',function(){
+  const src=this.getAttribute('src');
+  if(src)openZoom(this.src,this.alt);
 });
 
 // EXTRA DROPDOWN PREVIEW
