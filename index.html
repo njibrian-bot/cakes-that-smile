@@ -498,7 +498,7 @@ footer{background:#1A0A03;color:rgba(253,246,238,.7);padding:50px 24px 28px}
       <div class="cinfo fade-up">
         <h3>Let's Make Something Sweet Together</h3>
         <div class="cdetail"><div class="cicon">📧</div><div><div class="cdetail-label">Email</div><div class="cdetail-text">hello@cakesthatsmile.com</div></div></div>
-        <div class="cdetail"><div class="cicon">📱</div><div><div class="cdetail-label">Phone / Text</div><div class="cdetail-text">(555) 000-0000</div></div></div>
+        <div class="cdetail"><div class="cicon">📱</div><div><div class="cdetail-label">Phone / Text</div><div class="cdetail-text">(980) 333-2970</div></div></div>
         <div class="cdetail"><div class="cicon">🕐</div><div><div class="cdetail-label">Order Lead Time</div><div class="cdetail-text">48–72 hours minimum<br>Custom orders: 1 week+</div></div></div>
         <div class="cdetail"><div class="cicon">📍</div><div><div class="cdetail-label">Serving</div><div class="cdetail-text">Continental United States<br>Local pickup &amp; delivery available</div></div></div>
         <div class="social-links">
@@ -538,7 +538,7 @@ footer{background:#1A0A03;color:rgba(253,246,238,.7);padding:50px 24px 28px}
             </div>
           </div>
           <div class="form-submit">
-            <button type="submit" class="btn btn-gold" style="font-size:1rem;padding:15px 38px">Send Message</button>
+            <button type="submit" class="btn btn-gold" style="background:#25D366;font-size:1rem;padding:15px 38px">📲 Send via WhatsApp</button>
           </div>
         </form>
       </div>
@@ -726,7 +726,22 @@ document.getElementById('orderForm').addEventListener('submit',function(e){
   f.reset();
   document.querySelectorAll('.oitem').forEach(c=>c.classList.remove('selected'));
 });
-document.getElementById('contactForm').addEventListener('submit',e=>handleForm(e,e.target));
+document.getElementById('contactForm').addEventListener('submit',function(e){
+  e.preventDefault();
+  const f=e.target;
+  const name=f.querySelector('#c-name').value.trim();
+  const email=f.querySelector('#c-email').value.trim();
+  const subject=f.querySelector('#c-subject').value||'General Inquiry';
+  const message=f.querySelector('#c-message').value.trim();
+  let msg='\u{1F4AC} *Message — Cakes That Smile*\n\n';
+  msg+=`*Name:* ${name}\n`;
+  msg+=`*Email:* ${email}\n`;
+  msg+=`*Topic:* ${subject}\n`;
+  msg+=`*Message:*\n${message}`;
+  window.open('https://wa.me/19803332970?text='+encodeURIComponent(msg),'_blank');
+  showToast('✅ Opening WhatsApp with your message!');
+  f.reset();
+});
 </script>
 </body>
 </html>
