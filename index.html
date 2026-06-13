@@ -123,11 +123,13 @@ a{text-decoration:none;color:inherit}
 .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(43,170,173,.12);background:var(--white)}
 .form-group textarea{resize:vertical;min-height:110px}
 .order-items-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px}
-.oitem{border:2px solid var(--cream-dark);border-radius:12px;padding:13px 10px;cursor:pointer;transition:all .3s;text-align:center;user-select:none}
-.oitem:hover,.oitem.selected{border-color:var(--teal);background:rgba(43,170,173,.06)}
+.oitem{border:2px solid var(--cream-dark);border-radius:12px;overflow:hidden;cursor:pointer;transition:all .3s;text-align:center;user-select:none}
+.oitem:hover,.oitem.selected{border-color:var(--teal);box-shadow:0 4px 16px rgba(43,170,173,.15)}
 .oitem input[type=checkbox]{display:none}
-.oitem-icon{font-size:1.7rem;margin-bottom:.25rem}
-.oitem-name{font-weight:700;font-size:.87rem;color:var(--brown)}
+.oitem-icon img{width:100%;height:100px;object-fit:cover;display:block}
+.oitem-icon-placeholder{height:100px;display:flex;align-items:center;justify-content:center;font-size:2.2rem;background:linear-gradient(135deg,var(--cream-dark),var(--cream))}
+.oitem-body{padding:9px 10px 11px}
+.oitem-name{font-weight:700;font-size:.85rem;color:var(--brown)}
 .oitem-price{font-size:.79rem;color:var(--teal);font-weight:700}
 .form-submit{text-align:center;margin-top:1.8rem}
 .form-note{font-size:.8rem;color:var(--text-light);margin-top:.9rem;text-align:center}
@@ -400,14 +402,14 @@ footer{background:#1A0A03;color:rgba(253,246,238,.7);padding:50px 24px 28px}
           <div class="form-group full">
             <label>Select Items (choose all that apply) *</label>
             <div class="order-items-grid">
-              <label class="oitem"><input type="checkbox" name="items" value="Carrot Bundt Cake ($40)"><div class="oitem-icon">🥕</div><div class="oitem-name">Carrot Bundt Cake</div><div class="oitem-price">$40</div></label>
-              <label class="oitem"><input type="checkbox" name="items" value="Chocolate Chip Marble Cake ($45)"><div class="oitem-icon">🍫</div><div class="oitem-name">Chocolate Chip Marble</div><div class="oitem-price">$45</div></label>
-              <label class="oitem"><input type="checkbox" name="items" value="Not ya Mama's Peach Cobbler Cake ($65)"><div class="oitem-icon">🍑</div><div class="oitem-name">Peach Cobbler Cake</div><div class="oitem-price">$65</div></label>
-              <label class="oitem"><input type="checkbox" name="items" value="Almond Cake ($40)"><div class="oitem-icon">🌰</div><div class="oitem-name">Almond Cake</div><div class="oitem-price">$40</div></label>
-              <label class="oitem"><input type="checkbox" name="items" value="Cream Cheese Pound Cake ($40)"><div class="oitem-icon">🍰</div><div class="oitem-name">Cream Cheese Pound Cake</div><div class="oitem-price">$40</div></label>
-              <label class="oitem"><input type="checkbox" name="items" value="Heavenly Coconut Cake ($50)"><div class="oitem-icon">🥥</div><div class="oitem-name">Heavenly Coconut Cake</div><div class="oitem-price">$50</div></label>
-              <label class="oitem"><input type="checkbox" name="items" value="Berry Crumble Cake ($45)"><div class="oitem-icon">🫐</div><div class="oitem-name">Berry Crumble Cake</div><div class="oitem-price">$45</div></label>
-              <label class="oitem"><input type="checkbox" name="items" value="Custom Order"><div class="oitem-icon">✨</div><div class="oitem-name">Custom Order</div><div class="oitem-price">Let's Talk</div></label>
+              <label class="oitem"><input type="checkbox" name="items" value="Carrot Bundt Cake ($40)"><div class="oitem-icon"><img src="Refined/Carrot Bundt Cake.png" alt="Carrot Bundt Cake"></div><div class="oitem-body"><div class="oitem-name">Carrot Bundt Cake</div><div class="oitem-price">$40</div></div></label>
+              <label class="oitem"><input type="checkbox" name="items" value="Chocolate Chip Marble Cake ($45)"><div class="oitem-icon"><img src="Refined/Chocolate Chip Marble Cake.png" alt="Chocolate Chip Marble Cake"></div><div class="oitem-body"><div class="oitem-name">Chocolate Chip Marble</div><div class="oitem-price">$45</div></div></label>
+              <label class="oitem"><input type="checkbox" name="items" value="Not ya Mama's Peach Cobbler Cake ($65)"><div class="oitem-icon"><img src="Refined/Not ya Mama's Peach Cobbler Cake.png" alt="Peach Cobbler Cake"></div><div class="oitem-body"><div class="oitem-name">Peach Cobbler Cake</div><div class="oitem-price">$65</div></div></label>
+              <label class="oitem"><input type="checkbox" name="items" value="Almond Cake ($40)"><div class="oitem-icon"><img src="Refined/Almond Cake.png" alt="Almond Cake"></div><div class="oitem-body"><div class="oitem-name">Almond Cake</div><div class="oitem-price">$40</div></div></label>
+              <label class="oitem"><input type="checkbox" name="items" value="Cream Cheese Pound Cake ($40)"><div class="oitem-icon"><img src="Refined/Cream Cheese Pound Cake.png" alt="Cream Cheese Pound Cake"></div><div class="oitem-body"><div class="oitem-name">Cream Cheese Pound Cake</div><div class="oitem-price">$40</div></div></label>
+              <label class="oitem"><input type="checkbox" name="items" value="Heavenly Coconut Cake ($50)"><div class="oitem-icon"><img src="Refined/Heavenly Coconut Cake.png" alt="Heavenly Coconut Cake"></div><div class="oitem-body"><div class="oitem-name">Heavenly Coconut Cake</div><div class="oitem-price">$50</div></div></label>
+              <label class="oitem"><input type="checkbox" name="items" value="Berry Crumble Cake ($45)"><div class="oitem-icon"><img src="Refined/Berry Crumble Cake.png" alt="Berry Crumble Cake"></div><div class="oitem-body"><div class="oitem-name">Berry Crumble Cake</div><div class="oitem-price">$45</div></div></label>
+              <label class="oitem"><input type="checkbox" name="items" value="Custom Order"><div class="oitem-icon-placeholder">✨</div><div class="oitem-body"><div class="oitem-name">Custom Order</div><div class="oitem-price">Let's Talk</div></div></label>
             </div>
           </div>
           <div class="form-group full">
