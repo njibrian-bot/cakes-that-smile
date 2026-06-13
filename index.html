@@ -131,6 +131,11 @@ a{text-decoration:none;color:inherit}
 .oitem-body{padding:9px 10px 11px}
 .oitem-name{font-weight:700;font-size:.82rem;color:var(--brown)}
 .oitem-price{font-size:.79rem;color:var(--teal);font-weight:700}
+.extra-preview{display:none;align-items:center;gap:16px;margin-top:12px;padding:14px 16px;background:var(--cream);border:2px solid var(--teal);border-radius:14px}
+.extra-preview.show{display:flex}
+.extra-preview img{width:90px;height:90px;object-fit:cover;border-radius:10px;flex-shrink:0;box-shadow:0 4px 12px var(--shadow)}
+.extra-preview-info .extra-preview-name{font-family:'Playfair Display',serif;font-weight:700;font-size:1rem;color:var(--brown)}
+.extra-preview-info .extra-preview-price{font-weight:700;font-size:.9rem;color:var(--teal);margin-top:3px}
 .form-submit{text-align:center;margin-top:1.8rem}
 .form-note{font-size:.8rem;color:var(--text-light);margin-top:.9rem;text-align:center}
 
@@ -415,9 +420,16 @@ footer{background:#1A0A03;color:rgba(253,246,238,.7);padding:50px 24px 28px}
             <label for="o-extra">Additional Items / More Options</label>
             <select id="o-extra" name="extra_item">
               <option value="">-- Select an additional item --</option>
-              <option value="Custom Order">Custom Order — Let's Talk</option>
-              <option value="Cup Cakes">Cup Cakes — Price varies</option>
+              <option value="Cup Cakes|Refined/CupCakes.png|Price varies">Cup Cakes — Price varies</option>
+              <option value="Custom Order||Let's Talk">Custom Order — Let's Talk</option>
             </select>
+            <div class="extra-preview" id="extraPreview">
+              <img id="extraPreviewImg" src="" alt="">
+              <div class="extra-preview-info">
+                <div class="extra-preview-name" id="extraPreviewName"></div>
+                <div class="extra-preview-price" id="extraPreviewPrice"></div>
+              </div>
+            </div>
           </div>
           <div class="form-group full">
             <label for="o-delivery">Pickup or Delivery?</label>
@@ -626,6 +638,19 @@ document.querySelectorAll('.oitem').forEach(card=>{
   });
 });
 
+// EXTRA DROPDOWN PREVIEW
+document.getElementById('o-extra').addEventListener('change',function(){
+  const [name,src,price]=(this.value||'').split('|');
+  const preview=document.getElementById('extraPreview');
+  const img=document.getElementById('extraPreviewImg');
+  if(!name){preview.classList.remove('show');return;}
+  document.getElementById('extraPreviewName').textContent=name;
+  document.getElementById('extraPreviewPrice').textContent=price||'';
+  if(src){img.src=src;img.alt=name;img.style.display='block';}
+  else{img.style.display='none';}
+  preview.classList.add('show');
+});
+
 // SCROLL ANIMATIONS
 const obs=new IntersectionObserver(entries=>{ entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } }); },{threshold:.1});
 document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
@@ -659,8 +684,8 @@ document.getElementById('orderForm').addEventListener('submit',function(e){
   const delivery=f.querySelector('#o-delivery').value;
   const notes=f.querySelector('#o-notes').value.trim();
   const items=[...f.querySelectorAll('input[name="items"]:checked')].map(i=>i.value);
-  const extra=f.querySelector('#o-extra').value;
-  if(extra) items.push(extra);
+  const extraRaw=f.querySelector('#o-extra').value;
+  if(extraRaw){const[eName,,ePrice]=extraRaw.split('|');items.push(`${eName}${ePrice?' ('+ePrice+')':''}`);}
   const deliveryLabel={pickup:'Pickup',local_delivery:'Local Delivery',shipping:'Shipping — Continental US'}[delivery]||'Not specified';
   let msg='🎂 *New Order — Cakes That Smile*\n\n';
   msg+=`*Name:* ${name}\n`;
