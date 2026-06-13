@@ -631,11 +631,8 @@ function closeMobile(){ document.getElementById('mobileMenu').classList.remove('
 
 // ORDER ITEM CARDS
 document.querySelectorAll('.oitem').forEach(card=>{
-  card.addEventListener('click',()=>{
-    card.classList.toggle('selected');
-    const cb=card.querySelector('input[type=checkbox]');
-    cb.checked=!cb.checked;
-  });
+  const cb=card.querySelector('input[type=checkbox]');
+  cb.addEventListener('change',()=>card.classList.toggle('selected',cb.checked));
 });
 
 // EXTRA DROPDOWN PREVIEW
