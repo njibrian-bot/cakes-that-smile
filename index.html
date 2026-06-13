@@ -427,8 +427,8 @@ footer{background:#1A0A03;color:rgba(253,246,238,.7);padding:50px 24px 28px}
           </div>
         </div>
         <div class="form-submit">
-          <button type="submit" class="btn btn-primary" style="font-size:1rem;padding:15px 48px">Submit Order Request</button>
-          <p class="form-note">We'll confirm your order and pricing within 24 hours. A deposit may be required for large or custom orders.</p>
+          <button type="submit" class="btn btn-primary" style="background:#25D366;border-color:#25D366;font-size:1rem;padding:15px 48px">📲 Send Order via WhatsApp</button>
+          <p class="form-note">Tapping the button opens WhatsApp with your order details pre-filled. We'll confirm within 24 hours.</p>
         </div>
       </form>
     </div>
@@ -642,7 +642,30 @@ async function handleForm(e,form){
   }catch{ showToast('❌ Network error — please email us directly.'); }
   finally{ btn.textContent=orig; btn.disabled=false; }
 }
-document.getElementById('orderForm').addEventListener('submit',e=>handleForm(e,e.target));
+document.getElementById('orderForm').addEventListener('submit',function(e){
+  e.preventDefault();
+  const f=e.target;
+  const name=f.querySelector('#o-name').value.trim();
+  const email=f.querySelector('#o-email').value.trim();
+  const phone=f.querySelector('#o-phone').value.trim();
+  const date=f.querySelector('#o-date').value;
+  const delivery=f.querySelector('#o-delivery').value;
+  const notes=f.querySelector('#o-notes').value.trim();
+  const items=[...f.querySelectorAll('input[name="items"]:checked')].map(i=>i.value);
+  const deliveryLabel={pickup:'Pickup',local_delivery:'Local Delivery',shipping:'Shipping — Continental US'}[delivery]||'Not specified';
+  let msg='🎂 *New Order — Cakes That Smile*\n\n';
+  msg+=`*Name:* ${name}\n`;
+  msg+=`*Email:* ${email}\n`;
+  msg+=`*Phone:* ${phone}\n`;
+  msg+=`*Pickup / Delivery Date:* ${date||'Not specified'}\n`;
+  msg+=`*Delivery Type:* ${deliveryLabel}\n`;
+  msg+=`*Items Ordered:*\n${items.length?items.map(i=>`  • ${i}`).join('\n'):'  • None selected'}\n`;
+  if(notes) msg+=`*Notes:* ${notes}\n`;
+  window.open('https://wa.me/19803332970?text='+encodeURIComponent(msg),'_blank');
+  showToast('✅ Opening WhatsApp with your order!');
+  f.reset();
+  document.querySelectorAll('.oitem').forEach(c=>c.classList.remove('selected'));
+});
 document.getElementById('contactForm').addEventListener('submit',e=>handleForm(e,e.target));
 </script>
 </body>
