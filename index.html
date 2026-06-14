@@ -712,7 +712,7 @@ document.getElementById('orderForm').addEventListener('submit',function(e){
   const extraRaw=f.querySelector('#o-extra').value;
   if(extraRaw){const[eName,,ePrice]=extraRaw.split('|');items.push(`${eName}${ePrice?' ('+ePrice+')':''}`);}
   const deliveryLabel={pickup:'Pickup',local_delivery:'Local Delivery',shipping:'Shipping — Continental US'}[delivery]||'Not specified';
-  let msg=String.fromCodePoint(0x1F382)+' *New Order — Cakes That Smile*\n\n';
+  let msg='*New Order — Cakes That Smile*\n\n';
   msg+=`*Name:* ${name}\n`;
   msg+=`*Email:* ${email}\n`;
   msg+=`*Phone:* ${phone}\n`;
