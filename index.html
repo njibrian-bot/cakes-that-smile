@@ -485,18 +485,10 @@ footer{background:#1A0A03;color:rgba(253,246,238,.7);padding:20px 24px 14px}
             </div>
           </div>
           <div class="form-group full">
-            <label for="o-extra">Additional Items / More Options</label>
-            <select id="o-extra" name="extra_item">
-              <option value="">-- Select an additional item --</option>
-              <option value="Cup Cakes|Refined/CupCakes.png|Price varies">Cup Cakes — Price varies</option>
-              <option value="Custom Order||Let's Talk">Custom Order — Let's Talk</option>
-            </select>
-            <div class="extra-preview" id="extraPreview">
-              <img id="extraPreviewImg" src="" alt="">
-              <div class="extra-preview-info">
-                <div class="extra-preview-name" id="extraPreviewName"></div>
-                <div class="extra-preview-price" id="extraPreviewPrice"></div>
-              </div>
+            <label>Additional Items / More Options</label>
+            <div class="order-items-grid">
+              <label class="oitem"><input type="checkbox" name="items" value="Cup Cakes (Price varies)"><div class="oitem-icon"><img src="Refined/CupCakes.png" alt="Cup Cakes"></div><div class="oitem-body"><div class="oitem-name">Cup Cakes</div><div class="oitem-price">Price varies</div></div></label>
+              <label class="oitem"><input type="checkbox" name="items" value="Custom Order (Let's Talk)"><div class="oitem-icon-placeholder">🎂</div><div class="oitem-body"><div class="oitem-name">Custom Order</div><div class="oitem-price">Let's Talk</div></div></label>
             </div>
           </div>
           <div class="form-group full">
@@ -729,23 +721,6 @@ document.addEventListener('keydown',e=>{if(zoomModal.classList.contains('open')&
 document.querySelectorAll('.oitem-icon img').forEach(img=>{
   img.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();openZoom(img.src,img.alt);});
 });
-document.getElementById('extraPreviewImg').addEventListener('click',function(){
-  const src=this.getAttribute('src');
-  if(src)openZoom(this.src,this.alt);
-});
-
-// EXTRA DROPDOWN PREVIEW
-document.getElementById('o-extra').addEventListener('change',function(){
-  const [name,src,price]=(this.value||'').split('|');
-  const preview=document.getElementById('extraPreview');
-  const img=document.getElementById('extraPreviewImg');
-  if(!name){preview.classList.remove('show');return;}
-  document.getElementById('extraPreviewName').textContent=name;
-  document.getElementById('extraPreviewPrice').textContent=price||'';
-  if(src){img.src=src;img.alt=name;img.style.display='block';}
-  else{img.style.display='none';}
-  preview.classList.add('show');
-});
 
 // SCROLL ANIMATIONS
 const obs=new IntersectionObserver(entries=>{ entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } }); },{threshold:.1});
@@ -780,8 +755,6 @@ document.getElementById('orderForm').addEventListener('submit',function(e){
   const delivery=f.querySelector('#o-delivery').value;
   const notes=f.querySelector('#o-notes').value.trim();
   const items=[...f.querySelectorAll('input[name="items"]:checked')].map(i=>i.value);
-  const extraRaw=f.querySelector('#o-extra').value;
-  if(extraRaw){const[eName,,ePrice]=extraRaw.split('|');items.push(`${eName}${ePrice?' ('+ePrice+')':''}`);}
   const deliveryLabel={pickup:'Pickup',local_delivery:'Local Delivery',shipping:'Shipping — Continental US'}[delivery]||'Not specified';
   let msg='*New Order — Cakes That Smile*\n\n';
   msg+=`*Name:* ${name}\n`;
