@@ -152,6 +152,13 @@ button,a,.oitem,.filter-btn{touch-action:manipulation}
 .extra-preview img{width:90px;height:90px;object-fit:cover;border-radius:10px;flex-shrink:0;box-shadow:0 4px 12px var(--shadow)}
 .extra-preview-info .extra-preview-name{font-family:'Playfair Display',serif;font-weight:700;font-size:1rem;color:var(--brown)}
 .extra-preview-info .extra-preview-price{font-weight:700;font-size:.9rem;color:var(--teal);margin-top:3px}
+.extra-dropdown{position:relative}
+.extra-toggle{width:100%;display:flex;align-items:center;justify-content:space-between;padding:9px 13px;border:2px solid var(--cream-dark);border-radius:10px;background:var(--cream);font-family:'Lato',sans-serif;font-size:.95rem;color:var(--text-light);cursor:pointer;transition:all .3s;text-align:left}
+.extra-toggle:hover,.extra-toggle.open{border-color:var(--teal);box-shadow:0 0 0 3px rgba(43,170,173,.12);background:var(--white)}
+.extra-arrow{font-size:.75rem;transition:transform .3s;color:var(--brown-mid);flex-shrink:0}
+.extra-toggle.open .extra-arrow{transform:rotate(180deg)}
+.extra-panel{display:none;margin-top:8px;padding:12px;background:var(--cream);border:2px solid var(--teal);border-radius:12px}
+.extra-panel.open{display:block}
 .form-submit{text-align:center;margin-top:1.2rem}
 .form-note{font-size:.8rem;color:var(--text-light);margin-top:.9rem;text-align:center}
 
@@ -486,9 +493,17 @@ footer{background:#1A0A03;color:rgba(253,246,238,.7);padding:20px 24px 14px}
           </div>
           <div class="form-group full">
             <label>Additional Items / More Options</label>
-            <div class="order-items-grid">
-              <label class="oitem"><input type="checkbox" name="items" value="Cup Cakes (Price varies)"><div class="oitem-icon"><img src="Refined/CupCakes.png" alt="Cup Cakes"></div><div class="oitem-body"><div class="oitem-name">Cup Cakes</div><div class="oitem-price">Price varies</div></div></label>
-              <label class="oitem"><input type="checkbox" name="items" value="Custom Order (Let's Talk)"><div class="oitem-icon-placeholder">🎂</div><div class="oitem-body"><div class="oitem-name">Custom Order</div><div class="oitem-price">Let's Talk</div></div></label>
+            <div class="extra-dropdown">
+              <button type="button" class="extra-toggle" id="extraToggle">
+                <span id="extraToggleLabel">-- Select additional items --</span>
+                <span class="extra-arrow">▾</span>
+              </button>
+              <div class="extra-panel" id="extraPanel">
+                <div class="order-items-grid">
+                  <label class="oitem"><input type="checkbox" name="items" value="Cup Cakes (Price varies)"><div class="oitem-icon"><img src="Refined/CupCakes.png" alt="Cup Cakes"></div><div class="oitem-body"><div class="oitem-name">Cup Cakes</div><div class="oitem-price">Price varies</div></div></label>
+                  <label class="oitem"><input type="checkbox" name="items" value="Custom Order (Let's Talk)"><div class="oitem-icon-placeholder">🎂</div><div class="oitem-body"><div class="oitem-name">Custom Order</div><div class="oitem-price">Let's Talk</div></div></label>
+                </div>
+              </div>
             </div>
           </div>
           <div class="form-group full">
@@ -722,6 +737,17 @@ document.querySelectorAll('.oitem-icon img').forEach(img=>{
   img.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();openZoom(img.src,img.alt);});
 });
 
+// EXTRA DROPDOWN
+const extraToggle=document.getElementById('extraToggle');
+const extraPanel=document.getElementById('extraPanel');
+extraToggle.addEventListener('click',()=>{extraToggle.classList.toggle('open');extraPanel.classList.toggle('open');});
+document.addEventListener('click',e=>{if(!e.target.closest('.extra-dropdown')){extraToggle.classList.remove('open');extraPanel.classList.remove('open');}});
+function updateExtraLabel(){
+  const sel=[...extraPanel.querySelectorAll('input[type=checkbox]:checked')].map(cb=>cb.value.replace(/\s*\(.*\)/,'').trim());
+  document.getElementById('extraToggleLabel').textContent=sel.length?sel.join(', '):'-- Select additional items --';
+}
+extraPanel.querySelectorAll('input[type=checkbox]').forEach(cb=>cb.addEventListener('change',updateExtraLabel));
+
 // SCROLL ANIMATIONS
 const obs=new IntersectionObserver(entries=>{ entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } }); },{threshold:.1});
 document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
@@ -768,6 +794,7 @@ document.getElementById('orderForm').addEventListener('submit',function(e){
   showToast('✅ Opening WhatsApp with your order!');
   f.reset();
   document.querySelectorAll('.oitem').forEach(c=>c.classList.remove('selected'));
+  extraToggle.classList.remove('open');extraPanel.classList.remove('open');updateExtraLabel();
 });
 document.getElementById('contactForm').addEventListener('submit',function(e){
   e.preventDefault();
