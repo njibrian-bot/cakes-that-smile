@@ -127,8 +127,12 @@ button,a,.oitem,.filter-btn{touch-action:manipulation}
 .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(43,170,173,.12);background:var(--white)}
 .form-group textarea{resize:vertical;min-height:88px}
 .order-items-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
-.oitem{border:2px solid var(--cream-dark);border-radius:12px;overflow:hidden;cursor:pointer;transition:all .3s;text-align:center;user-select:none}
-.oitem:hover,.oitem.selected{border-color:var(--teal);box-shadow:0 4px 16px rgba(43,170,173,.15)}
+.oitem{border:2px solid var(--cream-dark);border-radius:12px;overflow:hidden;cursor:pointer;transition:all .3s;text-align:center;user-select:none;position:relative}
+.oitem:hover{border-color:var(--teal);box-shadow:0 4px 16px rgba(43,170,173,.15)}
+.oitem.selected{border-color:var(--teal);box-shadow:0 6px 22px rgba(43,170,173,.3);background:rgba(43,170,173,.06)}
+.oitem.selected .oitem-body{background:rgba(43,170,173,.1)}
+.oitem.selected .oitem-name{color:var(--teal)}
+.oitem.selected::after{content:'✓';position:absolute;top:6px;right:6px;background:var(--teal);color:#fff;width:22px;height:22px;border-radius:50%;font-size:.8rem;font-weight:700;line-height:22px;text-align:center;z-index:2;pointer-events:none}
 .oitem input[type=checkbox]{display:none}
 .oitem-icon img{width:100%;height:85px;object-fit:cover;display:block}
 .oitem-icon-placeholder{height:85px;display:flex;align-items:center;justify-content:center;font-size:2.2rem;background:linear-gradient(135deg,var(--cream-dark),var(--cream))}
@@ -706,6 +710,12 @@ window.addEventListener('scroll',()=>{if(mobileMenuEl.classList.contains('open')
 document.querySelectorAll('.oitem').forEach(card=>{
   const cb=card.querySelector('input[type=checkbox]');
   cb.addEventListener('change',()=>card.classList.toggle('selected',cb.checked));
+  card.addEventListener('click',e=>{
+    if(e.target.tagName==='IMG') return; // let image clicks open zoom
+    cb.checked=!cb.checked;
+    cb.dispatchEvent(new Event('change'));
+    e.preventDefault();
+  });
 });
 
 // ORDER IMAGE ZOOM
