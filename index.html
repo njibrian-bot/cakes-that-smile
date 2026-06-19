@@ -2,8 +2,14 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#FDF6EE">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="description" content="Handcrafted artisan cakes baked fresh to order in Charlotte, NC. Nationwide shipping available.">
 <title>Cakes That Smile | Artisan Pastries — USA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Dancing+Script:wght@600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -142,16 +148,10 @@ button,a,.oitem,.filter-btn{touch-action:manipulation}
 .oitem-icon{position:relative}
 .oitem-icon img{cursor:zoom-in}
 .oitem:hover .oitem-icon::after{content:'🔍 tap to enlarge';position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,.52);color:#fff;font-size:.68rem;font-weight:700;letter-spacing:.4px;text-align:center;padding:5px 4px;pointer-events:none}
-#extraPreviewImg{cursor:zoom-in}
 #zoomModal{display:none;position:fixed;inset:0;z-index:3000;background:rgba(0,0,0,.92);align-items:center;justify-content:center;cursor:zoom-out}
 #zoomModal.open{display:flex}
 .zoom-img{max-width:90vw;max-height:88vh;border-radius:14px;object-fit:contain;cursor:default;box-shadow:0 24px 60px rgba(0,0,0,.6)}
 .zoom-close{position:absolute;top:18px;right:26px;font-size:2.4rem;color:#fff;cursor:pointer;background:none;border:none;line-height:1}
-.extra-preview{display:none;align-items:center;gap:16px;margin-top:12px;padding:14px 16px;background:var(--cream);border:2px solid var(--teal);border-radius:14px}
-.extra-preview.show{display:flex}
-.extra-preview img{width:90px;height:90px;object-fit:cover;border-radius:10px;flex-shrink:0;box-shadow:0 4px 12px var(--shadow)}
-.extra-preview-info .extra-preview-name{font-family:'Playfair Display',serif;font-weight:700;font-size:1rem;color:var(--brown)}
-.extra-preview-info .extra-preview-price{font-weight:700;font-size:.9rem;color:var(--teal);margin-top:3px}
 .extra-dropdown{position:relative}
 .extra-toggle{width:100%;display:flex;align-items:center;justify-content:space-between;padding:9px 13px;border:2px solid var(--cream-dark);border-radius:10px;background:var(--cream);font-family:'Lato',sans-serif;font-size:.95rem;color:var(--text-light);cursor:pointer;transition:all .3s;text-align:left}
 .extra-toggle:hover,.extra-toggle.open{border-color:var(--teal);box-shadow:0 0 0 3px rgba(43,170,173,.12);background:var(--white)}
@@ -227,11 +227,11 @@ footer{background:#1A0A03;color:rgba(253,246,238,.7);padding:20px 24px 14px}
   .form-grid{grid-template-columns:1fr}
   .form-group.full{grid-column:1}
   .footer-inner{grid-template-columns:1fr}
-  .order-wrapper{padding:28px 20px}
-  .cform-card{padding:26px 20px}
+  .order-wrapper{padding:20px 16px}
+  .cform-card{padding:18px 16px}
   .gallery-grid{columns:2}
   /* Section padding reduced for mobile */
-  #about,#specialties,#gallery,#order,#testimonials,#contact{padding:64px 20px}
+  #about,#specialties,#gallery,#order,#testimonials,#contact{padding:40px 20px}
   /* iOS: prevent input zoom (font-size must be ≥16px) */
   .form-group input,.form-group select,.form-group textarea{font-size:16px}
   /* About images: switch from absolute-positioned overlay to stacked */
@@ -264,8 +264,8 @@ footer{background:#1A0A03;color:rgba(253,246,238,.7);padding:20px 24px 14px}
   .menu-card-desc{display:none}
   .menu-card-title{font-size:1rem}
   .gallery-item img{max-height:160px}
-  #about,#specialties,#gallery,#order,#testimonials,#contact{padding:48px 16px}
-  #hero{padding:80px 16px 48px}
+  #about,#specialties,#gallery,#order,#testimonials,#contact{padding:32px 16px}
+  #hero{padding:72px 16px 32px}
   .hero-logo{max-width:200px}
   .hero-tagline{font-size:1.3rem}
   .hero-desc{font-size:.92rem}
@@ -343,8 +343,8 @@ footer{background:#1A0A03;color:rgba(253,246,238,.7);padding:20px 24px 14px}
   <div class="container">
     <div class="about-grid">
       <div class="about-images fade-up">
-        <img src="Refined/Heavenly Coconut Cake.png" alt="Heavenly Coconut Cake" class="about-img-main">
-        <img src="Refined/Berry Crumble Cake.png" alt="Berry Crumble Cake" class="about-img-accent">
+        <img src="Refined/Heavenly Coconut Cake.png" alt="Heavenly Coconut Cake" class="about-img-main" loading="lazy">
+        <img src="Refined/Berry Crumble Cake.png" alt="Berry Crumble Cake" class="about-img-accent" loading="lazy">
       </div>
       <div class="about-text fade-up">
         <p class="sec-sub">Our Story</p>
@@ -371,7 +371,7 @@ footer{background:#1A0A03;color:rgba(253,246,238,.7);padding:20px 24px 14px}
     <p class="sec-sub fade-up">Everything baked fresh, just for you</p>
     <div class="menu-grid">
       <div class="menu-card fade-up">
-        <img src="Refined/Carrot Bundt Cake.png" alt="Carrot Bundt Cake" class="menu-card-img">
+        <img src="Refined/Carrot Bundt Cake.png" alt="Carrot Bundt Cake" class="menu-card-img" loading="lazy">
         <div class="menu-card-body">
           <h3 class="menu-card-title">Carrot Bundt Cake</h3>
           <p class="menu-card-desc">Warmly spiced with cinnamon and nutmeg, packed with fresh carrots and finished with a luscious cream cheese glaze. A timeless classic, perfected.</p>
@@ -379,7 +379,7 @@ footer{background:#1A0A03;color:rgba(253,246,238,.7);padding:20px 24px 14px}
         </div>
       </div>
       <div class="menu-card fade-up">
-        <img src="Refined/Chocolate Chip Marble Cake.png" alt="Chocolate Chip Marble Cake" class="menu-card-img">
+        <img src="Refined/Chocolate Chip Marble Cake.png" alt="Chocolate Chip Marble Cake" class="menu-card-img" loading="lazy">
         <div class="menu-card-body">
           <h3 class="menu-card-title">Chocolate Chip Marble Cake</h3>
           <p class="menu-card-desc">A stunning swirl of vanilla and chocolate batters studded with rich chocolate chips. Gorgeous to look at and even better to eat.</p>
@@ -387,7 +387,7 @@ footer{background:#1A0A03;color:rgba(253,246,238,.7);padding:20px 24px 14px}
         </div>
       </div>
       <div class="menu-card fade-up">
-        <img src="Refined/Not ya Mama's Peach Cobbler Cake.png" alt="Not ya Mama's Peach Cobbler Cake" class="menu-card-img">
+        <img src="Refined/Not ya Mama's Peach Cobbler Cake.png" alt="Not ya Mama's Peach Cobbler Cake" class="menu-card-img" loading="lazy">
         <div class="menu-card-body">
           <h3 class="menu-card-title">Not ya Mama's Peach Cobbler Cake</h3>
           <p class="menu-card-desc">Our most requested cake — a Southern-inspired showstopper bursting with fresh peach filling and a buttery cobbler crust topping.</p>
@@ -395,7 +395,7 @@ footer{background:#1A0A03;color:rgba(253,246,238,.7);padding:20px 24px 14px}
         </div>
       </div>
       <div class="menu-card fade-up">
-        <img src="Refined/Almond Cake.png" alt="Almond Cake" class="menu-card-img">
+        <img src="Refined/Almond Cake.png" alt="Almond Cake" class="menu-card-img" loading="lazy">
         <div class="menu-card-body">
           <h3 class="menu-card-title">Almond Cake</h3>
           <p class="menu-card-desc">Delicately moist and fragrant with toasted almond flour and pure almond extract, finished with a vanilla glaze. Elegant and irresistible.</p>
@@ -403,7 +403,7 @@ footer{background:#1A0A03;color:rgba(253,246,238,.7);padding:20px 24px 14px}
         </div>
       </div>
       <div class="menu-card fade-up">
-        <img src="Refined/Cream Cheese Pound Cake.png" alt="Cream Cheese Pound Cake" class="menu-card-img">
+        <img src="Refined/Cream Cheese Pound Cake.png" alt="Cream Cheese Pound Cake" class="menu-card-img" loading="lazy">
         <div class="menu-card-body">
           <h3 class="menu-card-title">Cream Cheese Pound Cake</h3>
           <p class="menu-card-desc">The ultimate dense, velvety pound cake enriched with cream cheese for an extraordinary depth of flavor. A Southern staple elevated to perfection.</p>
@@ -411,7 +411,7 @@ footer{background:#1A0A03;color:rgba(253,246,238,.7);padding:20px 24px 14px}
         </div>
       </div>
       <div class="menu-card fade-up">
-        <img src="Refined/Heavenly Coconut Cake.png" alt="Heavenly Coconut Cake" class="menu-card-img">
+        <img src="Refined/Heavenly Coconut Cake.png" alt="Heavenly Coconut Cake" class="menu-card-img" loading="lazy">
         <div class="menu-card-body">
           <h3 class="menu-card-title">Heavenly Coconut Cake</h3>
           <p class="menu-card-desc">Tender coconut cake draped in silky coconut cream and toasted coconut flakes. Light, tropical, and absolutely divine in every bite.</p>
@@ -419,7 +419,7 @@ footer{background:#1A0A03;color:rgba(253,246,238,.7);padding:20px 24px 14px}
         </div>
       </div>
       <div class="menu-card fade-up">
-        <img src="Refined/Berry Crumble Cake.png" alt="Berry Crumble Cake" class="menu-card-img">
+        <img src="Refined/Berry Crumble Cake.png" alt="Berry Crumble Cake" class="menu-card-img" loading="lazy">
         <div class="menu-card-body">
           <h3 class="menu-card-title">Berry Crumble Cake</h3>
           <p class="menu-card-desc">A cloud-soft vanilla base layered with fresh berries and a buttery golden crumble top. Seasonal, special, and absolutely irresistible.</p>
@@ -465,15 +465,15 @@ footer{background:#1A0A03;color:rgba(253,246,238,.7);padding:20px 24px 14px}
         <div class="form-grid">
           <div class="form-group">
             <label for="o-name">Full Name *</label>
-            <input type="text" id="o-name" name="name" placeholder="Jane Smith" required>
+            <input type="text" id="o-name" name="name" placeholder="Jane Smith" required autocomplete="name">
           </div>
           <div class="form-group">
             <label for="o-email">Email Address *</label>
-            <input type="email" id="o-email" name="email" placeholder="jane@email.com" required>
+            <input type="email" id="o-email" name="email" placeholder="jane@email.com" required autocomplete="email" inputmode="email">
           </div>
           <div class="form-group">
             <label for="o-phone">Phone Number *</label>
-            <input type="tel" id="o-phone" name="phone" placeholder="(555) 000-0000" required>
+            <input type="tel" id="o-phone" name="phone" placeholder="(555) 000-0000" required autocomplete="tel" inputmode="tel">
           </div>
           <div class="form-group">
             <label for="o-date">Desired Pickup / Delivery Date *</label>
@@ -572,7 +572,7 @@ footer{background:#1A0A03;color:rgba(253,246,238,.7);padding:20px 24px 14px}
       <div class="cinfo fade-up">
         <h3>Let's Make Something Sweet Together</h3>
         <div class="cdetail"><div class="cicon">📧</div><div><div class="cdetail-label">Email</div><div class="cdetail-text"><a href="mailto:cakesthatsmile@gmail.com" style="color:inherit">cakesthatsmile@gmail.com</a></div></div></div>
-        <div class="cdetail"><div class="cicon">📱</div><div><div class="cdetail-label">Phone / Text / WhatsApp</div><div class="cdetail-text">(980) 333-2970</div><a href="https://wa.me/19803332970" target="_blank" style="display:inline-flex;align-items:center;gap:5px;margin-top:5px;background:#25D366;color:#fff;font-size:.75rem;font-weight:700;padding:4px 10px;border-radius:20px;text-decoration:none">📲 WhatsApp Us</a></div></div>
+        <div class="cdetail"><div class="cicon">📱</div><div><div class="cdetail-label">Phone / Text / WhatsApp</div><div class="cdetail-text">(980) 333-2970</div><a href="https://wa.me/19803332970" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:5px;margin-top:5px;background:#25D366;color:#fff;font-size:.75rem;font-weight:700;padding:4px 10px;border-radius:20px;text-decoration:none">📲 WhatsApp Us</a></div></div>
 <div class="cdetail"><div class="cicon">📍</div><div><div class="cdetail-label">Serving</div><div class="cdetail-text">Charlotte, NC area<br>Nationwide shipping available</div></div></div>
         <div class="social-links">
           <a href="#" class="social-btn" title="Instagram">📸</a>
@@ -587,11 +587,11 @@ footer{background:#1A0A03;color:rgba(253,246,238,.7);padding:20px 24px 14px}
           <div class="form-grid">
             <div class="form-group">
               <label for="c-name">Name *</label>
-              <input type="text" id="c-name" name="name" placeholder="Your name" required>
+              <input type="text" id="c-name" name="name" placeholder="Your name" required autocomplete="name">
             </div>
             <div class="form-group">
               <label for="c-email">Email *</label>
-              <input type="email" id="c-email" name="email" placeholder="Your email" required>
+              <input type="email" id="c-email" name="email" placeholder="Your email" required autocomplete="email" inputmode="email">
             </div>
             <div class="form-group full">
               <label for="c-subject">Topic</label>
@@ -760,17 +760,6 @@ document.getElementById('o-date').min=d.toISOString().split('T')[0];
 function showToast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),4500); }
 
 // FORM SUBMIT
-async function handleForm(e,form){
-  e.preventDefault();
-  const btn=form.querySelector('button[type=submit]');
-  const orig=btn.textContent; btn.textContent='Sending...'; btn.disabled=true;
-  try{
-    const res=await fetch(form.action,{method:'POST',body:new FormData(form),headers:{Accept:'application/json'}});
-    if(res.ok){ showToast('✅ Sent! We\'ll be in touch within 24 hours.'); form.reset(); document.querySelectorAll('.oitem').forEach(c=>c.classList.remove('selected')); }
-    else{ showToast('❌ Something went wrong — please email us directly.'); }
-  }catch{ showToast('❌ Network error — please email us directly.'); }
-  finally{ btn.textContent=orig; btn.disabled=false; }
-}
 document.getElementById('orderForm').addEventListener('submit',function(e){
   e.preventDefault();
   const f=e.target;
